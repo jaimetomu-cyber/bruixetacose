@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Bruixeta | Confección y Arreglos</title>
+    <style>
+        /* --- Paleta de Colores Boutique (Rojo y Blanco) --- */
+        :root {
+            --bg-white: #ffffff;
+            --bg-light-gray: #f8f9fa;
+            --primary-red: #d90429; 
+            --red-hover: #ef233c;
+            --text-dark: #2b2d42;
+            --text-gray: #8d99ae;
+            --border-color: #edf2f4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { background-color: var(--bg-white); color: var(--text-dark); line-height: 1.6; }
+
+        /* --- Cabecera y Navegación --- */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(5px);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .brand-container { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+        }
+        
+        .logo-img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a { 
+            color: var(--text-dark); 
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-weight: 500; 
+            font-size: 1rem; 
+            transition: color 0.3s ease; 
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a:hover { color: var(--primary-red); }
+
+        /* Efecto hover para los iconos SVG */
+        nav a:hover svg {
+            stroke: var(--primary-red);
+            transform: scale(1.1);
+            transition: transform 0.3s ease, stroke 0.3s ease;
+        }
+
+        nav a.nav-btn {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        nav a.nav-btn:hover {
+            background-color: var(--red-hover);
+            color: white;
+        }
+
+        /* --- Hero Section (Inicio) --- */
+        .hero { 
+            background-color: var(--bg-light-gray);
+            min-height: 75vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 0 20px; 
+            border-bottom: 5px solid var(--primary-red);
+            background-image: radial-gradient(circle at center, white 0%, var(--bg-light-gray) 100%);
+        }
+
+        .hero h1 { 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            color: var(--text-dark);
+        }
+
+        .hero p { 
+            font-size: 1.2rem; 
+            color: var(--text-gray); 
+            max-width: 650px; 
+            margin-bottom: 40px; 
+        }
+
+        .btn { 
+            padding: 16px 40px; 
+            background-color: var(--primary-red); 
+            color: white; 
+            text-decoration: none; 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            border-radius: 6px; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 6px 20px rgba(217, 4, 41, 0.25);
+        }
+
+        .btn:hover { 
+            background-color: var(--red-hover); 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(217, 4, 41, 0.35);
+        }
+
+        /* --- Sección de Servicios --- */
+        .services-section {
+            padding: 80px 5% 40px; 
+            max-width: 1200px; 
+            margin: 0 auto;
+        }
+
+        .section-title { 
+            text-align: center; 
+            font-size: 2.2rem; 
+            margin-bottom: 50px; 
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-red);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--bg-white);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-color);
+            border-bottom-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .service-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* --- Galería --- */
+        .gallery-section { padding: 40px 5% 80px; max-width: 1200px; margin: 0 auto; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        /* --- Footer y Mapa --- */
+        footer { 
+            background-color: var(--text-dark); 
+            color: white;
+            padding: 70px 5% 40px; 
+            text-align: center; 
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 { margin-bottom: 25px; font-size: 1.6rem; color: white; }
+        
+        .footer-schedule {
+            background-color: rgba(255,255,255,0.06);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: inline-block;
+            text-align: left;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .footer-schedule p { color: #e9ecef; margin-bottom: 10px; font-size: 1.05rem; }
+        .footer-schedule strong { color: white; }
+        
+        /* Enlaces en el footer */
+        .footer-content a { color: #e9ecef; text-decoration: none; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 5px; }
+        .footer-content a:hover { color: var(--primary-red); }
+        .footer-content a:hover svg { stroke: var(--primary-red); }
+
+        .contact-info { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 5px; color: #e9ecef; font-size: 1.1rem; }
+
+        /* ESTILOS DEL MAPA */
+        .map-link {
+            display: block;
+            text-decoration: none;
+            margin: 25px auto;
+            max-width: 450px;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .map-container:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(217, 4, 41, 0.4);
+        }
+
+        .map-container iframe {
+            display: block;
+            pointer-events: none; /* Hace que el clic ignore el mapa interno y use el enlace */
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.15);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .map-container:hover .map-overlay {
+            background: rgba(0,0,0,0.5);
+        }
+
+        .map-hover-text {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 24px;
+            background-color: var(--primary-red);
+            border-radius: 50px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-container:hover .map-hover-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) { 
+            header { flex-direction: column; gap: 20px; padding: 20px; } 
+            nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            nav a { margin: 0 5px; } 
+            .logo-img { height: 75px; }
+            .map-hover-text { opacity: 1; transform: translateY(0); padding: 8px 16px; font-size: 0.9rem; }
+            .map-overlay { background: rgba(0,0,0,0.3); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#inicio" class="brand-container">
+            <img src="image_d804be.png" alt="Logotipo La Bruixeta" class="logo-img">
+        </a>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#trabajos">Colección</a>
+            <a href="#contacto">Contacto</a>
+            <a href="https://www.instagram.com/labruixetacose/" target="_blank" title="Síguenos en Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="reservas.html" class="nav-btn">Reservar Cita</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Confección a tu medida.</h1>
+        <p>Diseño exclusivo y arreglos de costura. Transformamos tus ideas en prendas únicas con la calidad y el detalle que mereces.</p>
+        <a href="reservas.html" class="btn">Reserva tu cita hoy</a>
+    </section>
+
+    <section class="services-section" id="servicios">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Venta de tela</h3>
+                <p style="color: var(--text-gray);">Contamos con una variada selección de tejidos y materiales para dar vida a tus proyectos de costura.</p>
+            </div>
+            <div class="service-card">
+                <h3>Confección a medida</h3>
+                <p style="color: var(--text-gray);">Diseñamos y creamos prendas exclusivas que se adaptan perfectamente a tu figura y estilo personal.</p>
+            </div>
+            <div class="service-card">
+                <h3>Arreglos y composturas</h3>
+                <p style="color: var(--text-gray);">Ajustamos, reparamos y transformamos tu ropa para que te siente impecable y alarguemos su vida útil.</p>
+            </div>
+            <div class="service-card">
+                <h3>Mercería</h3>
+                <p style="color: var(--text-gray);">Encuentra todos los detalles y fornituras que necesitas: botones, cremalleras, hilos, cintas y accesorios para tus labores.</p>
+            </div>
+            <div class="service-card">
+                <h3>Indumentaria Valenciana</h3>
+                <p style="color: var(--text-gray);">Especialistas en trajes de fallera y tradicionales. Confeccionamos tu indumentaria a medida con el máximo rigor y detalle.</p>
+            </div>
+            <div class="service-card">
+                <h3>Disfraces Personalizados</h3>
+                <p style="color: var(--text-gray);">Hacemos realidad tus ideas. Diseñamos y cosemos disfraces únicos para carnaval, teatro, representaciones o eventos especiales.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="trabajos">
+        <h2 class="section-title">Nuestros Trabajos</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="foto_1.png" alt="Prenda 1"></div>
+            <div class="gallery-item"><img src="foto_2.png" alt="Prenda 2"></div>
+            <div class="gallery-item"><img src="foto_3.png" alt="Prenda 3"></div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-content">
+            <h3>Contacto y Horarios</h3>
+            
+            <div class="contact-info">
+                <strong>Dirección:</strong> Calle Cervantes nº 1, 46940 Manises, Valencia
+            </div>
+            
+            <!-- CONTENEDOR DEL MAPA CLICKABLE -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Calle+Cervantes+1,+46940+Manises,+Valencia" target="_blank" class="map-link" title="Abrir en Google Maps">
+                <div class="map-container">
+                    <!-- Iframe que carga el mapa centrado en esa dirección -->
+                    <iframe src="https://maps.google.com/maps?q=Calle%20Cervantes%201,%2046940%20Manises,%20Valencia&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    
+                    <div class="map-overlay">
+                        <div class="map-hover-text">
+                            <!-- Icono de ubicación -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Ver ruta en Maps
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="contact-info">
+                <strong>Teléfono:</strong> <a href="tel:+34680748540">680 74 85 40</a>
+            </div>
+            
+            <div class="contact-info" style="margin-top: 15px;">
+                <strong>Síguenos:</strong> 
+                <a href="https://www.instagram.com/labruixetacose/" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    @labruixetacose
+                </a>
+            </div>
+            
+            <div class="footer-schedule">
+                <p><strong>Horario de atención:</strong></p>
+                <p><strong>Lunes y Martes:</strong> 10:00 - 14:00</p>
+                <p><strong>Miércoles, Jueves y Viernes:</strong> 17:00 - 20:00</p>
+            </div>
+            
+            <br>
+            <p style="font-size: 0.9em; margin-top: 30px; color: #adb5bd;">&copy; 2026 La Bruixeta. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
